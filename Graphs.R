@@ -6,22 +6,22 @@ library(ggplot2)
 library(dplyr)
 library(tidyverse)
 
-Wild <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 2) #Wild
-Captive <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 3) #Captive
-Males <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 4) #Males
-Females <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 5) #Females
-Juvenile<- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 6) #Juveniles
-Adult <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 7) #Adult
-Healthy <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 8) #Healthy
-Sick <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 9) #Sick
-Non_polluted <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 10) #nonpolluted
-Polluted <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 11) #Polluted
-Snakes <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 13) #Snakes
-Lizards<- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 14) #Lizards
-Crocs <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 15) #Crocs
-Turtles <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 16) #Turtles
-Passerine <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 17) #Passerine
-Non_Passerine <- read_excel("/Users/amelia/Documents/Biol601-ATorster/Project_AT/Table_S2_orig.xlsx", sheet = 18) #Non-Passerine
+Wild <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 2) #Wild
+Captive <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 3) #Captive
+Males <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 4) #Males
+Females <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 5) #Females
+Juvenile<- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 6) #Juveniles
+Adult <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 7) #Adult
+Healthy <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 8) #Healthy
+Sick <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 9) #Sick
+Non_polluted <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 10) #nonpolluted
+Polluted <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 11) #Polluted
+Snakes <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 13) #Snakes
+Lizards<- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 14) #Lizards
+Crocs <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 15) #Crocs
+Turtles <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 16) #Turtles
+Passerine <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 17) #Passerine
+Non_Passerine <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 18) #Non-Passerine
 
 #Colors for the graphs
 custom_colors <- c(
@@ -1341,9 +1341,17 @@ ggplot(
 
 dev.off()
 
+#Alpha Diversities
+png("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Alpha_Diversity_Barplot.png", width = 3000,
+    height = 2400,
+    res = 300)
 Alpha<-data.frame(Metric=c("Shannon", "Chao1", "Simpson", "Ace", "Faith", "Other"), Value=c(53, 31,17,17,10,53))
+Alpha$Metric <- factor(
+  Alpha$Metric,
+  levels = Alpha$Metric
+)
 ggplot(Alpha, aes(x = Metric, y = Value)) +
-  geom_bar(stat = "identity", fill = "pink") +
+  geom_bar(stat = "identity", fill = "pink3") +
   geom_text(aes(label = Value), vjust = 0.5) +
   labs(
     title = "Alpha Diversities",
@@ -1352,5 +1360,31 @@ ggplot(Alpha, aes(x = Metric, y = Value)) +
   ) +
   theme_minimal() +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1)
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
   )
+dev.off()
+
+#Beta Diversities
+png("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Beta_Diversity_Barplot.png", width = 3000,
+    height = 2400,
+    res = 300)
+Beta<-data.frame(Metric=c("Bray-Curtis", "UniFrac", "Other"), Value=c(34, 27,39))
+Beta$Metric <- factor(
+  Beta$Metric,
+  levels = Beta$Metric
+)
+ggplot(Beta, aes(x = Metric, y = Value)) +
+  geom_bar(stat = "identity", fill = "lightblue3") +
+  geom_text(aes(label = Value), vjust = 0.5) +
+  labs(
+    title = "Beta Diversities",
+    x = "",
+    y = "Number of times Metric is Used"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
+  )
+dev.off()
