@@ -5,23 +5,25 @@ library(readxl)
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
+library(gridExtra)
+library(grid)
 
-Wild <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 2) #Wild
-Captive <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 3) #Captive
-Males <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 4) #Males
-Females <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 5) #Females
-Juvenile<- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 6) #Juveniles
-Adult <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 7) #Adult
-Healthy <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 8) #Healthy
-Sick <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 9) #Sick
-Non_polluted <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 10) #nonpolluted
-Polluted <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 11) #Polluted
-Snakes <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 13) #Snakes
-Lizards<- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 14) #Lizards
-Crocs <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 15) #Crocs
-Turtles <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 16) #Turtles
-Passerine <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 17) #Passerine
-Non_Passerine <- read_excel("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 18) #Non-Passerine
+Wild <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 2) #Wild
+Captive <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 3) #Captive
+Males <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 4) #Males
+Females <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 5) #Females
+Juvenile<- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 6) #Juveniles
+Adult <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 7) #Adult
+Healthy <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 8) #Healthy
+Sick <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 9) #Sick
+Non_polluted <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 10) #nonpolluted
+Polluted <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 11) #Polluted
+Snakes <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 13) #Snakes
+Lizards<- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 14) #Lizards
+Crocs <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 15) #Crocs
+Turtles <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 16) #Turtles
+Passerine <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 17) #Passerine
+Non_Passerine <- read_excel("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Table_S2.xlsx", sheet = 18) #Non-Passerine
 
 #Colors for the graphs
 custom_colors <- c(
@@ -40,7 +42,8 @@ custom_colors <- c(
   "Desulfobacteria"="#E07A1F",
   "Chlaymdiae"="#BC9E82",
   "Patescibacteria"="#3B719F",
-  "Gracilibacteria"="#A9588C"
+  "Gracilibacteria"="#A9588C",
+  "Acidobacteria"="pink"
 )
 
 
@@ -78,13 +81,13 @@ Wild_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Wild.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Wild.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+wild_plot<-ggplot(
   Wild_long,
   aes(
     x = Sample,
@@ -95,8 +98,18 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "A",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -120,6 +133,7 @@ ggplot(
   labs( title = "Wild",y = "Number of Mentions" ) +
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
+print(wild_plot)
 
 dev.off()
 
@@ -159,13 +173,13 @@ Captive_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Captive.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Captive.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+captive_plot<-ggplot(
   Captive_long,
   aes(
     x = Sample,
@@ -176,8 +190,18 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "B",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -201,6 +225,7 @@ ggplot(
   labs( title = "Captive",y = "Number of Mentions" ) +
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
+print(captive_plot)
 
 dev.off()
 
@@ -239,13 +264,13 @@ Males_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Males.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Males.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+male_plot<-ggplot(
   Males_long,
   aes(
     x = Sample,
@@ -256,8 +281,17 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "C",
+    size = 8,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -266,7 +300,7 @@ ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 14 ),
     
     axis.title.x = element_blank(),
     
@@ -280,8 +314,14 @@ ggplot(
   
   labs( title = "Males",y = "Number of Mentions" ) +
   
+  scale_y_continuous(
+    limits = c(0, 4),
+    breaks = c(0,1,2,3,4),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  
   scale_x_discrete( labels = c("Most Dominant","Least Dominant") )
-
+print(male_plot)
 dev.off()
 
 
@@ -311,7 +351,7 @@ Females_long <- Females %>%
 Females_long$Phylum <- factor(
   Females_long$Phylum,
   levels = c(
-    "Gracilibacteria", "Patescibacteria","Chlaymdiae", "Desulfobacteria", "Cyanobacteria", "Chloroflexi", "Deinococcota", "Campylobacterota","Verrucomicrobia" ,"Pseduomonas","Tenericutes","Firmicutes","Fusobacteria","Bacteroidetes","Actinobacteria","Proteobacteria"))
+    "Acidobacteria","Gracilibacteria", "Patescibacteria","Chlaymdiae", "Desulfobacteria", "Cyanobacteria", "Chloroflexi", "Deinococcota", "Campylobacterota","Verrucomicrobia" ,"Pseduomonas","Tenericutes","Firmicutes","Fusobacteria","Bacteroidetes","Actinobacteria","Proteobacteria"))
 
 # Preserve original sample order
 Females_long$Sample <- factor(
@@ -320,13 +360,13 @@ Females_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Females.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Females.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+female_plot<-ggplot(
   Females_long,
   aes(
     x = Sample,
@@ -337,8 +377,17 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "D",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -361,8 +410,15 @@ ggplot(
   
   labs( title = "Females",y = "Number of Mentions" ) +
   
+  scale_y_continuous(
+    limits = c(0, 4),
+    breaks = c(0,1,2,3,4),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  
   scale_x_discrete( labels = c("Most Dominant (1)","2","Least Dominant (3)") )
 
+print(female_plot)
 dev.off()
 
 
@@ -402,13 +458,13 @@ Juvenile_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Juvenile.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Juvenile.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+Juv_plot<-ggplot(
   Juvenile_long,
   aes(
     x = Sample,
@@ -419,8 +475,17 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "E",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -445,6 +510,7 @@ ggplot(
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
 
+print(Juv_plot)
 dev.off()
 
 
@@ -482,13 +548,13 @@ Adult_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Adult.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Adult.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+Adult_plot<-ggplot(
   Adult_long,
   aes(
     x = Sample,
@@ -499,8 +565,17 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "F",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -525,6 +600,7 @@ ggplot(
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
 
+print(Adult_plot)
 dev.off()
 
 
@@ -562,13 +638,13 @@ Healthy_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Healthy.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Healthy.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+Healthy_plot<-ggplot(
   Healthy_long,
   aes(
     x = Sample,
@@ -579,8 +655,18 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "G",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -603,8 +689,15 @@ ggplot(
   
   labs( title = "Healthy",y = "Number of Mentions" ) +
   
+  scale_y_continuous(
+    limits = c(0, 6),
+    breaks = c(0,2,4,6),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
 
+print(Healthy_plot)
 dev.off()
 
 
@@ -642,13 +735,13 @@ Sick_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Sick.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Sick.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+sick_plot<-ggplot(
   Sick_long,
   aes(
     x = Sample,
@@ -659,8 +752,18 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "H",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -681,10 +784,77 @@ ggplot(
       hjust = 0.5,
       face = "bold")) +
   
-  labs( title = "Sick",y = "Number of Mentions" ) +
+  labs( title = "Sick/Injured",y = "Number of Mentions" ) +
+  
+  png(
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Sick.png",
+  width = 10,
+  height = 6,
+  units = "in",
+  res = 300)
+
+sick_plot<-ggplot(
+  Sick_long,
+  aes(
+    x = Sample,
+    y = Count,
+    fill = Phylum )) +
+  geom_bar(stat = "identity") +
+  
+  geom_text(
+    aes(label = ifelse(Count > 0, Count, "")),
+    position = position_stack(vjust = 0.5),
+    size = 10,
+    color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "H",
+    size = 14,
+    fontface = "bold"
+  ) +
+  
+  scale_fill_manual(values = custom_colors) +
+  
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1,
+      vjust = 1,
+      size = 8 ),
+    
+    axis.title.x = element_blank(),
+    
+    legend.text = element_text(size = 8),
+    legend.title = element_text(size = 9),
+    legend.key.size = unit(0.4, "cm"),
+    
+    plot.title = element_text(
+      hjust = 0.5,
+      face = "bold")) +
+  
+  labs( title = "Sick/Injured",y = "Number of Mentions" ) +
+  
+  scale_y_continuous(
+    limits = c(0, 6),
+    breaks = c(0,2,4,6),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
 
+print(sick_plot)
+dev.off()
+
+
+
+  
+  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+
+print(sick_plot)
 dev.off()
 
 
@@ -724,13 +894,13 @@ Non_polluted_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Non_polluted.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Non_polluted.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+non_polluted_plot<-ggplot(
   Non_polluted_long,
   aes(
     x = Sample,
@@ -741,8 +911,18 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "I",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -765,7 +945,15 @@ ggplot(
   
   labs( title = "Non-polluted",y = "Number of Mentions" ) +
   
+  scale_y_continuous(
+    limits = c(0, 4),
+    breaks = c(0,1,2,3,4),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+
+print(non_polluted_plot)
 
 dev.off()
 
@@ -806,13 +994,13 @@ Polluted_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Polluted.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Polluted.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+polluted_plot<-ggplot(
   Polluted_long,
   aes(
     x = Sample,
@@ -823,8 +1011,18 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "J",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -847,9 +1045,75 @@ ggplot(
   
   labs( title = "Polluted",y = "Number of Mentions" ) +
   
+  scale_y_continuous(
+    limits = c(0, 4),
+    breaks = c(0,1,2,3,4),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
 
+print(polluted_plot)
 dev.off()
+
+
+
+ 
+
+
+#Combined plots
+wild_plot <- wild_plot + theme_bw(base_size = 40)
+wild_plot <- wild_plot + theme(axis.title.x = element_blank())
+captive_plot <- captive_plot + theme_bw(base_size = 40)
+captive_plot <- captive_plot + theme(axis.title.x = element_blank())
+
+male_plot <- male_plot + theme_bw(base_size = 40)
+male_plot <- male_plot + theme(axis.title.x = element_blank())
+female_plot <- female_plot + theme_bw(base_size = 40)
+female_plot <- female_plot + theme(axis.title.x = element_blank())
+
+Juv_plot <- Juv_plot + theme_bw(base_size = 40)
+Juv_plot <- Juv_plot + theme(axis.title.x = element_blank())
+Adult_plot <- Adult_plot + theme_bw(base_size = 40)
+Adult_plot <- Adult_plot + theme(axis.title.x = element_blank())
+
+Healthy_plot <- Healthy_plot + theme_bw(base_size = 40)
+Healthy_plot <- Healthy_plot + theme(axis.title.x = element_blank())
+sick_plot <- sick_plot + theme_bw(base_size = 40)
+sick_plot <- sick_plot + theme(axis.title.x = element_blank())
+
+non_polluted_plot <- non_polluted_plot + theme_bw(base_size = 40)
+non_polluted_plot <- non_polluted_plot + theme(axis.title.x = element_blank())
+polluted_plot <- polluted_plot + theme_bw(base_size = 40)
+polluted_plot <- polluted_plot + theme(axis.title.x = element_blank())
+
+
+
+# Save combined figure
+png("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Combined_Condition_Plots.png",
+  width = 12000,
+  height = 14000,
+  res = 300
+)
+
+grid.arrange(
+  wild_plot, captive_plot,
+  male_plot, female_plot,
+  Juv_plot, Adult_plot,
+  Healthy_plot, sick_plot,
+  non_polluted_plot, polluted_plot,
+  ncol = 2,
+  heights = c(1.4, 0.6, 1.2, 0.6, 0.6),
+  
+  top = textGrob(
+    "Microbial Dominance in the Papers Based on Defining Characteristics",
+    gp = gpar(fontsize = 40, fontface = "bold"))
+)
+
+dev.off()
+
+
+
 
 
 
@@ -889,13 +1153,13 @@ Snakes_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Snakes.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Snakes.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+Snake_plot<-ggplot(
   Snakes_long,
   aes(
     x = Sample,
@@ -906,8 +1170,18 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "B",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -932,6 +1206,7 @@ ggplot(
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
 
+print(Snake_plot)
 dev.off()
 
 
@@ -970,13 +1245,13 @@ Lizards_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Lizards.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Lizards.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+lizard_plot<-ggplot(
   Lizards_long,
   aes(
     x = Sample,
@@ -987,8 +1262,18 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "A",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -1013,6 +1298,7 @@ ggplot(
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
 
+print(lizard_plot)
 dev.off()
 
 
@@ -1052,13 +1338,13 @@ Crocs_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Crocs.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Crocs.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+croc_plot<-ggplot(
   Crocs_long,
   aes(
     x = Sample,
@@ -1069,8 +1355,18 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "D",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -1095,9 +1391,8 @@ ggplot(
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
 
+print(croc_plot)
 dev.off()
-
-
 
 
  #Turtles
@@ -1134,13 +1429,13 @@ Turtles_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Turtles.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Turtles.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+turtle_plot<-ggplot(
   Turtles_long,
   aes(
     x = Sample,
@@ -1151,8 +1446,17 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "C",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -1176,6 +1480,7 @@ ggplot(
   labs( title = "Turtles",y = "Number of Mentions" ) +
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+print(turtle_plot)
 
 dev.off()
 
@@ -1216,13 +1521,13 @@ Passerine_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Passerine.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Passerine.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+Passerine_plot<-ggplot(
   Passerine_long,
   aes(
     x = Sample,
@@ -1233,8 +1538,17 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "E",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -1259,6 +1573,7 @@ ggplot(
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
 
+print(Passerine_plot)
 dev.off()
 
 
@@ -1296,13 +1611,13 @@ Non_Passerine_long$Sample <- factor(
 
 # Plot
 png(
-  filename = "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Non_Passerine.png",
+  filename = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Non_Passerine.png",
   width = 10,
   height = 6,
   units = "in",
   res = 300)
 
-ggplot(
+Non_Pass_plot<-ggplot(
   Non_Passerine_long,
   aes(
     x = Sample,
@@ -1313,8 +1628,17 @@ ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 2.5,
+    size = 10,
     color = "black") +
+  annotate(
+    "text",
+    x = 0.5,
+    y = Inf,
+    vjust = 1.2,
+    label = "F",
+    size = 14,
+    fontface = "bold"
+  ) +
   
   scale_fill_manual(values = custom_colors) +
   
@@ -1339,20 +1663,74 @@ ggplot(
   
   scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
 
+print(Non_Pass_plot)
 dev.off()
 
-#Alpha Diversities
-png("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Alpha_Diversity_Barplot.png", width = 3000,
-    height = 2400,
-    res = 300)
-Alpha<-data.frame(Metric=c("Shannon", "Chao1", "Simpson", "Ace", "Faith", "Other"), Value=c(53, 31,17,17,10,53))
-Alpha$Metric <- factor(
-  Alpha$Metric,
-  levels = Alpha$Metric
+
+#combined Taxa
+lizard_plot <- lizard_plot + theme_bw(base_size = 40)
+lizard_plot <- lizard_plot + theme(axis.title.x = element_blank())
+Snake_plot <- Snake_plot + theme_bw(base_size = 40)
+Snake_plot <- Snake_plot + theme(axis.title.x = element_blank())
+
+turtle_plot <- turtle_plot + theme_bw(base_size = 40)
+turtle_plot <- turtle_plot + theme(axis.title.x = element_blank())
+croc_plot <- croc_plot + theme_bw(base_size = 40)
+croc_plot <- croc_plot + theme(axis.title.x = element_blank())
+
+Passerine_plot <- Passerine_plot + theme_bw(base_size = 40)
+Passerine_plot <- Passerine_plot + theme(axis.title.x = element_blank())
+Non_Pass_plot <- Non_Pass_plot + theme_bw(base_size = 40)
+Non_Pass_plot <- Non_Pass_plot + theme(axis.title.x = element_blank())
+
+
+# Save combined figure
+png("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Combined_Taxa.png",
+    width = 12000,
+    height = 14000,
+    res = 300
 )
-ggplot(Alpha, aes(x = Metric, y = Value)) +
+grid.arrange(
+  lizard_plot, Snake_plot,
+  turtle_plot, croc_plot,
+  Passerine_plot, Non_Pass_plot,
+  ncol = 2,
+  
+  top = textGrob(
+    "Microbial Dominance Ratio in Sauropsida Groups",
+    gp = gpar(fontsize = 40, fontface = "bold"))
+)
+
+dev.off()
+
+
+
+
+
+
+
+# Alpha data
+Alpha <- data.frame(
+  Metric = c("Shannon", "Chao1", "Simpson", "Ace", "Faith", "Other"),
+  Value = c(53, 31, 17, 17, 10, 53)
+)
+
+Alpha$Metric <- factor(Alpha$Metric, levels = Alpha$Metric)
+
+# Beta data
+Beta <- data.frame(
+  Metric = c("Bray-Curtis", "UniFrac", "Other"),
+  Value = c(34, 27, 39)
+)
+
+Beta$Metric <- factor(Beta$Metric, levels = Beta$Metric)
+
+# Alpha plot
+p1 <- ggplot(Alpha, aes(x = Metric, y = Value)) +
   geom_bar(stat = "identity", fill = "pink3") +
-  geom_text(aes(label = Value), vjust = 0.5) +
+  geom_text(aes(label = Value), vjust = -0.5) +
+  annotate("text", x = 0.5, y = max(Alpha$Value) + 8,
+           label = "A", size = 8, fontface = "bold") +
   labs(
     title = "Alpha Diversities",
     x = "",
@@ -1363,22 +1741,51 @@ ggplot(Alpha, aes(x = Metric, y = Value)) +
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(hjust = 0.5)
   )
-dev.off()
 
-#Beta Diversities
-png("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Beta_Diversity_Barplot.png", width = 3000,
-    height = 2400,
-    res = 300)
-Beta<-data.frame(Metric=c("Bray-Curtis", "UniFrac", "Other"), Value=c(34, 27,39))
-Beta$Metric <- factor(
-  Beta$Metric,
-  levels = Beta$Metric
-)
-ggplot(Beta, aes(x = Metric, y = Value)) +
+# Beta plot
+p2 <- ggplot(Beta, aes(x = Metric, y = Value)) +
   geom_bar(stat = "identity", fill = "lightblue3") +
-  geom_text(aes(label = Value), vjust = 0.5) +
+  geom_text(aes(label = Value), vjust = -0.5) +
+  annotate("text", x = 0.5, y = max(Beta$Value) + 8,
+           label = "B", size = 8, fontface = "bold") +
   labs(
     title = "Beta Diversities",
+    x = "",
+    y = "Number of times Metric is Used"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
+  )
+
+# Save combined figure
+png(
+  "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Combined_Diversity_Barplots.png",
+  width = 6000,
+  height = 2400,
+  res = 300
+)
+
+grid.arrange(p1, p2, ncol = 2)
+
+dev.off()
+
+
+#Taxanomic Units
+png("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Taxa.png", width = 3000,
+    height = 2000,
+    res = 300)
+Taxa<-data.frame(Metric=c("ASV", "OTU 99%", "OTU 98%", "OTU 97%", "OTU 96%", "OTU 80%", "OTU 60%", "Other"), Value=c(19,3,1,37,2,1,1,4))
+Taxa$Metric <- factor(
+  Taxa$Metric,
+  levels = Taxa$Metric
+)
+ggplot(Taxa, aes(x = Metric, y = Value)) +
+  geom_bar(stat = "identity", fill = "#00B358") +
+  geom_text(aes(label = Value), vjust = -0.5) +
+  labs(
+    title = "Taxonomic Units Recorded",
     x = "",
     y = "Number of times Metric is Used"
   ) +
