@@ -951,7 +951,7 @@ non_polluted_plot<-ggplot(
     expand = expansion(mult = c(0, 0.05))
   ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "Least Dominant (4)") )
 
 print(non_polluted_plot)
 
@@ -1051,7 +1051,7 @@ polluted_plot<-ggplot(
     expand = expansion(mult = c(0, 0.05))
   ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "Least Dominant (4)") )
 
 print(polluted_plot)
 dev.off()
@@ -1107,7 +1107,7 @@ grid.arrange(
   
   top = textGrob(
     "Microbial Dominance in the Papers Based on Defining Characteristics",
-    gp = gpar(fontsize = 40, fontface = "bold"))
+    gp = gpar(fontsize = 70, fontface = "bold"))
 )
 
 dev.off()
@@ -1698,7 +1698,7 @@ grid.arrange(
   
   top = textGrob(
     "Microbial Dominance Ratio in Sauropsida Groups",
-    gp = gpar(fontsize = 40, fontface = "bold"))
+    gp = gpar(fontsize = 70, fontface = "bold"))
 )
 
 dev.off()
@@ -1736,7 +1736,7 @@ p1 <- ggplot(Alpha, aes(x = Metric, y = Value)) +
     x = "",
     y = "Number of times Metric is Used"
   ) +
-  theme_minimal() +
+  theme_minimal(base_size = 24) +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(hjust = 0.5)
@@ -1753,7 +1753,7 @@ p2 <- ggplot(Beta, aes(x = Metric, y = Value)) +
     x = "",
     y = "Number of times Metric is Used"
   ) +
-  theme_minimal() +
+  theme_minimal(base_size = 24) +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(hjust = 0.5)
@@ -1761,7 +1761,7 @@ p2 <- ggplot(Beta, aes(x = Metric, y = Value)) +
 
 # Save combined figure
 png(
-  "/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Combined_Diversity_Barplots.png",
+  "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Combined_Diversity_Barplots.png",
   width = 6000,
   height = 2400,
   res = 300
@@ -1773,7 +1773,7 @@ dev.off()
 
 
 #Taxanomic Units
-png("/Users/amelia/Documents/Reserach Microbiome Work/Sauropsida_Microbiomes/Taxa.png", width = 3000,
+png("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Taxa.png", width = 3000,
     height = 2000,
     res = 300)
 Taxa<-data.frame(Metric=c("ASV", "OTU 99%", "OTU 98%", "OTU 97%", "OTU 96%", "OTU 80%", "OTU 60%", "Other"), Value=c(19,3,1,37,2,1,1,4))
