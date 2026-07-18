@@ -12,7 +12,7 @@ library(stringr)
 install.packages("dplyr")
 library(dplyr)
 
-install.packages(tibble)
+install.packages("tibble")
 library(tibble)
 
 install.packages("DiagrammeRsvg")
@@ -30,7 +30,7 @@ design<-tibble::tribble(
 
 
 
-Fig1<-grViz(paste0("digraph flowchart{
+flowchart <- grViz(paste0("digraph flowchart{
 graph[
   rankdir=TB,
   label='Study Criteria',
@@ -79,6 +79,11 @@ tab1b -> tab2b [style=invis]
 "))
 
 
+svg <- export_svg(flowchart)
 
+rsvg_pdf(
+  charToRaw(svg),
+  file = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Study_Criteria.pdf"
+)
 
 

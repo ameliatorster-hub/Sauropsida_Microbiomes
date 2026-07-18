@@ -3,6 +3,7 @@ install.packages("ggplot2")
 
 library(readxl)
 library(ggplot2)
+install.packages("dplyr")
 library(dplyr)
 library(tidyverse)
 library(gridExtra)
@@ -98,16 +99,16 @@ wild_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "A",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -118,13 +119,13 @@ wild_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -132,7 +133,16 @@ wild_plot<-ggplot(
   
   labs( title = "Wild",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 print(wild_plot)
 
 dev.off()
@@ -190,16 +200,16 @@ captive_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "B",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -210,13 +220,13 @@ captive_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -224,7 +234,16 @@ captive_plot<-ggplot(
   
   labs( title = "Captive",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 print(captive_plot)
 
 dev.off()
@@ -281,7 +300,7 @@ male_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   annotate(
     "text",
@@ -300,13 +319,13 @@ male_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 14 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -320,7 +339,13 @@ male_plot<-ggplot(
     expand = expansion(mult = c(0, 0.05))
   ) +
   
-  scale_x_discrete( labels = c("Most Dominant","Least Dominant") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant ",
+      "Least\nDominant "
+    )
+  )
+
 print(male_plot)
 dev.off()
 
@@ -377,15 +402,15 @@ female_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   annotate(
     "text",
-    x = 0.5,
+    x = 0.6,
     y = Inf,
     vjust = 1.2,
     label = "D",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -396,13 +421,13 @@ female_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -416,7 +441,14 @@ female_plot<-ggplot(
     expand = expansion(mult = c(0, 0.05))
   ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2","Least Dominant (3)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "Least\nDominant (3)"
+    )
+  )
+
 
 print(female_plot)
 dev.off()
@@ -475,15 +507,15 @@ Juv_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "E",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -494,13 +526,13 @@ Juv_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -508,7 +540,16 @@ Juv_plot<-ggplot(
   
   labs( title = "Juvenile",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 
 print(Juv_plot)
 dev.off()
@@ -565,15 +606,15 @@ Adult_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "F",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -584,13 +625,13 @@ Adult_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -598,7 +639,16 @@ Adult_plot<-ggplot(
   
   labs( title = "Adult",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 
 print(Adult_plot)
 dev.off()
@@ -655,16 +705,16 @@ Healthy_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "G",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -675,13 +725,13 @@ Healthy_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -695,7 +745,16 @@ Healthy_plot<-ggplot(
     expand = expansion(mult = c(0, 0.05))
   ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3","4","Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 
 print(Healthy_plot)
 dev.off()
@@ -752,16 +811,16 @@ sick_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "H",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -772,13 +831,13 @@ sick_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -804,16 +863,16 @@ sick_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "H",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -824,13 +883,13 @@ sick_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -844,7 +903,16 @@ sick_plot<-ggplot(
     expand = expansion(mult = c(0, 0.05))
   ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 
 print(sick_plot)
 dev.off()
@@ -911,16 +979,16 @@ non_polluted_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "I",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -931,13 +999,13 @@ non_polluted_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -951,7 +1019,15 @@ non_polluted_plot<-ggplot(
     expand = expansion(mult = c(0, 0.05))
   ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "Least Dominant (4)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "Least\nDominant (4)"
+    )
+  )
+
 
 print(non_polluted_plot)
 
@@ -1011,16 +1087,16 @@ polluted_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "J",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -1031,13 +1107,13 @@ polluted_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -1051,7 +1127,15 @@ polluted_plot<-ggplot(
     expand = expansion(mult = c(0, 0.05))
   ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "Least Dominant (4)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "Least\nDominant (4)"
+    )
+  )
+
 
 print(polluted_plot)
 dev.off()
@@ -1062,38 +1146,37 @@ dev.off()
 
 
 #Combined plots
-wild_plot <- wild_plot + theme_bw(base_size = 40)
+wild_plot <- wild_plot + theme_bw(base_size = 16)
 wild_plot <- wild_plot + theme(axis.title.x = element_blank())
-captive_plot <- captive_plot + theme_bw(base_size = 40)
+captive_plot <- captive_plot + theme_bw(base_size = 16)
 captive_plot <- captive_plot + theme(axis.title.x = element_blank())
 
-male_plot <- male_plot + theme_bw(base_size = 40)
+male_plot <- male_plot + theme_bw(base_size = 16)
 male_plot <- male_plot + theme(axis.title.x = element_blank())
-female_plot <- female_plot + theme_bw(base_size = 40)
+female_plot <- female_plot + theme_bw(base_size = 16)
 female_plot <- female_plot + theme(axis.title.x = element_blank())
 
-Juv_plot <- Juv_plot + theme_bw(base_size = 40)
+Juv_plot <- Juv_plot + theme_bw(base_size = 16)
 Juv_plot <- Juv_plot + theme(axis.title.x = element_blank())
-Adult_plot <- Adult_plot + theme_bw(base_size = 40)
+Adult_plot <- Adult_plot + theme_bw(base_size = 16)
 Adult_plot <- Adult_plot + theme(axis.title.x = element_blank())
 
-Healthy_plot <- Healthy_plot + theme_bw(base_size = 40)
+Healthy_plot <- Healthy_plot + theme_bw(base_size = 16)
 Healthy_plot <- Healthy_plot + theme(axis.title.x = element_blank())
-sick_plot <- sick_plot + theme_bw(base_size = 40)
+sick_plot <- sick_plot + theme_bw(base_size = 16)
 sick_plot <- sick_plot + theme(axis.title.x = element_blank())
 
-non_polluted_plot <- non_polluted_plot + theme_bw(base_size = 40)
+non_polluted_plot <- non_polluted_plot + theme_bw(base_size = 16)
 non_polluted_plot <- non_polluted_plot + theme(axis.title.x = element_blank())
-polluted_plot <- polluted_plot + theme_bw(base_size = 40)
+polluted_plot <- polluted_plot + theme_bw(base_size = 16)
 polluted_plot <- polluted_plot + theme(axis.title.x = element_blank())
 
 
 
 # Save combined figure
-png("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Combined_Condition_Plots.png",
-  width = 12000,
-  height = 14000,
-  res = 300
+pdf(file="/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Combined_Condition_Plots.pdf",
+  width = 12,
+  height = 20
 )
 
 grid.arrange(
@@ -1107,7 +1190,7 @@ grid.arrange(
   
   top = textGrob(
     "Microbial Dominance in the Papers Based on Defining Characteristics",
-    gp = gpar(fontsize = 70, fontface = "bold"))
+    gp = gpar(fontsize = 25, fontface = "bold"))
 )
 
 dev.off()
@@ -1170,16 +1253,16 @@ Snake_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "B",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -1190,13 +1273,13 @@ Snake_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -1204,7 +1287,16 @@ Snake_plot<-ggplot(
   
   labs( title = "Snakes",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 
 print(Snake_plot)
 dev.off()
@@ -1262,16 +1354,16 @@ lizard_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "A",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -1282,13 +1374,13 @@ lizard_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -1296,7 +1388,16 @@ lizard_plot<-ggplot(
   
   labs( title = "Lizards",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 
 print(lizard_plot)
 dev.off()
@@ -1355,16 +1456,16 @@ croc_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "D",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -1375,13 +1476,13 @@ croc_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -1389,7 +1490,16 @@ croc_plot<-ggplot(
   
   labs( title = "Crocs",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 
 print(croc_plot)
 dev.off()
@@ -1446,15 +1556,15 @@ turtle_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "C",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -1465,13 +1575,13 @@ turtle_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -1479,7 +1589,16 @@ turtle_plot<-ggplot(
   
   labs( title = "Turtles",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 print(turtle_plot)
 
 dev.off()
@@ -1538,15 +1657,15 @@ Passerine_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "E",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -1557,13 +1676,13 @@ Passerine_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6 ),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -1571,7 +1690,16 @@ Passerine_plot<-ggplot(
   
   labs( title = "Passerine",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 
 print(Passerine_plot)
 dev.off()
@@ -1628,15 +1756,15 @@ Non_Pass_plot<-ggplot(
   geom_text(
     aes(label = ifelse(Count > 0, Count, "")),
     position = position_stack(vjust = 0.5),
-    size = 10,
+    size = 4.5,
     color = "black") +
   annotate(
     "text",
-    x = 0.5,
+    x = 0.7,
     y = Inf,
     vjust = 1.2,
     label = "F",
-    size = 14,
+    size = 8,
     fontface = "bold"
   ) +
   
@@ -1647,13 +1775,13 @@ Non_Pass_plot<-ggplot(
       angle = 45,
       hjust = 1,
       vjust = 1,
-      size = 8 ),
+      size = 6),
     
     axis.title.x = element_blank(),
     
-    legend.text = element_text(size = 8),
-    legend.title = element_text(size = 9),
-    legend.key.size = unit(0.4, "cm"),
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7),
+    legend.key.size = unit(0.3, "cm"),
     
     plot.title = element_text(
       hjust = 0.5,
@@ -1661,35 +1789,47 @@ Non_Pass_plot<-ggplot(
   
   labs( title = "Non-Passerine",y = "Number of Mentions" ) +
   
-  scale_x_discrete( labels = c("Most Dominant (1)","2", "3", "4", "Least Dominant (5)") )
+  scale_x_discrete(
+    labels = c(
+      "Most\nDominant (1)",
+      "2",
+      "3",
+      "4",
+      "Least\nDominant (5)"
+    )
+  )
+
 
 print(Non_Pass_plot)
 dev.off()
 
 
 #combined Taxa
-lizard_plot <- lizard_plot + theme_bw(base_size = 40)
+lizard_plot <- lizard_plot + theme_bw(base_size = 16)
 lizard_plot <- lizard_plot + theme(axis.title.x = element_blank())
-Snake_plot <- Snake_plot + theme_bw(base_size = 40)
+Snake_plot <- Snake_plot + theme_bw(base_size = 16)
 Snake_plot <- Snake_plot + theme(axis.title.x = element_blank())
 
-turtle_plot <- turtle_plot + theme_bw(base_size = 40)
+turtle_plot <- turtle_plot + theme_bw(base_size = 16)
 turtle_plot <- turtle_plot + theme(axis.title.x = element_blank())
-croc_plot <- croc_plot + theme_bw(base_size = 40)
+croc_plot <- croc_plot + theme_bw(base_size = 16)
 croc_plot <- croc_plot + theme(axis.title.x = element_blank())
 
-Passerine_plot <- Passerine_plot + theme_bw(base_size = 40)
+Passerine_plot <- Passerine_plot + theme_bw(base_size = 16)
 Passerine_plot <- Passerine_plot + theme(axis.title.x = element_blank())
-Non_Pass_plot <- Non_Pass_plot + theme_bw(base_size = 40)
+Non_Pass_plot <- Non_Pass_plot + theme_bw(base_size = 16)
 Non_Pass_plot <- Non_Pass_plot + theme(axis.title.x = element_blank())
 
 
-# Save combined figure
-png("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Combined_Taxa.png",
-    width = 12000,
-    height = 14000,
-    res = 300
+library(gridExtra)
+library(ggplot2)
+
+pdf(
+  file = "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Combined_Taxa1.pdf",
+  width = 12,
+  height = 14
 )
+
 grid.arrange(
   lizard_plot, Snake_plot,
   turtle_plot, croc_plot,
@@ -1698,10 +1838,15 @@ grid.arrange(
   
   top = textGrob(
     "Microbial Dominance Ratio in Sauropsida Groups",
-    gp = gpar(fontsize = 70, fontface = "bold"))
+    gp = gpar(fontsize = 24, fontface = "bold")
+  )
 )
 
 dev.off()
+
+
+
+
 
 
 
@@ -1728,7 +1873,7 @@ Beta$Metric <- factor(Beta$Metric, levels = Beta$Metric)
 # Alpha plot
 p1 <- ggplot(Alpha, aes(x = Metric, y = Value)) +
   geom_bar(stat = "identity", fill = "pink3") +
-  geom_text(aes(label = Value), vjust = -0.5) +
+  geom_text(aes(label = Value), vjust = -0.5, size =4) +
   annotate("text", x = 0.5, y = max(Alpha$Value) + 8,
            label = "A", size = 8, fontface = "bold") +
   labs(
@@ -1738,14 +1883,27 @@ p1 <- ggplot(Alpha, aes(x = Metric, y = Value)) +
   ) +
   theme_minimal(base_size = 24) +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(hjust = 0.5)
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1,
+      size = 10 ),
+    
+    axis.text.y = element_text(size = 12),
+    
+    axis.title.y = element_text(
+      size = 14),
+    
+    plot.title = element_text(
+      hjust = 0.5,
+      size = 16
+    )
   )
+
 
 # Beta plot
 p2 <- ggplot(Beta, aes(x = Metric, y = Value)) +
   geom_bar(stat = "identity", fill = "lightblue3") +
-  geom_text(aes(label = Value), vjust = -0.5) +
+  geom_text(aes(label = Value), vjust = -0.5, size= 4) +
   annotate("text", x = 0.5, y = max(Beta$Value) + 8,
            label = "B", size = 8, fontface = "bold") +
   labs(
@@ -1755,16 +1913,28 @@ p2 <- ggplot(Beta, aes(x = Metric, y = Value)) +
   ) +
   theme_minimal(base_size = 24) +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(hjust = 0.5)
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1,
+      size = 10
+    ),
+    
+    axis.text.y = element_text(
+      size = 12),
+    axis.title.y = element_text(
+      size = 14),
+    plot.title = element_text(
+      hjust = 0.5,
+      size = 16
+    )
   )
 
+
 # Save combined figure
-png(
-  "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Combined_Diversity_Barplots.png",
-  width = 6000,
-  height = 2400,
-  res = 300
+pdf(
+  "/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Combined_Diversity_Barplots.pdf",
+  width = 10,
+  height = 5
 )
 
 grid.arrange(p1, p2, ncol = 2)
@@ -1773,9 +1943,8 @@ dev.off()
 
 
 #Taxanomic Units
-png("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Taxa.png", width = 3000,
-    height = 2000,
-    res = 300)
+pdf("/Users/amelia/Documents/Reserach_Microbiome_Work/Sauropsida_Microbiomes/Taxa.pdf", width = 8,
+    height = 6)
 Taxa<-data.frame(Metric=c("ASV", "OTU 99%", "OTU 98%", "OTU 97%", "OTU 96%", "OTU 80%", "OTU 60%", "Other"), Value=c(19,3,1,37,2,1,1,4))
 Taxa$Metric <- factor(
   Taxa$Metric,
@@ -1791,7 +1960,18 @@ ggplot(Taxa, aes(x = Metric, y = Value)) +
   ) +
   theme_minimal() +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(hjust = 0.5)
-  )
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1,
+      size = 10
+    ),
+    
+    axis.text.y = element_text(
+      size = 12),
+    axis.title.y = element_text(
+      size = 14),
+    plot.title = element_text(
+      hjust = 0.5,
+      size = 16
+    ))
 dev.off()
